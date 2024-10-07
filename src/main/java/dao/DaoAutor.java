@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import conexiones.Conexion;
 import entidades.Autor;
+import entidades.Socio;
 
 public class DaoAutor {
 	public DaoAutor() {
@@ -142,5 +144,61 @@ public class DaoAutor {
                 con.close();
         }
         return a;
+	}
+	
+	
+	public List<Autor> listadoAutoresPaginado(int pagina, int numregpag) throws SQLException, Exception {
+		ArrayList<Autor> listaautores;
+		listaautores = new ArrayList<Autor>();
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement st = null;
+		
+		try {
+			Conexion miconex = new Conexion();
+			con = miconex.getConexion();
+			String ordenSql = "SELECT * FROM Autor ORDER BY idAutor ASC";
+			System.out.println("La orden lanzada es: " + ordenSql);
+			st = con.prepareStatement(ordenSql);
+			rs = st.executeQuery();
+			
+			while (rs.next()) {
+				Autor miAutor = new Autor();
+				miAutor.setIdAutor(rs.getInt("IDAutor"));
+				miAutor.setNombre(rs.getString("NOMBRE"));
+				miAutor.setFechaNacimiento(rs.getDate("FECHANACIMIENTO"));
+				listaautores.add(miAutor);
+			}
+			
+			int primera = pagina * numregpag;
+			
+			if (primera > listaautores.size()) {
+				primera = listaautores.size();
+			}
+			
+			int ultima = pagina * numregpag + numregpag;
+			
+			if (ultima > listaautores.size()) {
+				ultima = listaautores.size();
+			}
+			
+			List<Autor> listaautoresRecortada = listaautores.subList(primera, ultima);
+			System.out.println(listaautoresRecortada);
+			
+			return listaautoresRecortada;
+			
+		} catch (SQLException se) {
+			throw se;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+//			if (rs != null)
+//				rs.close();
+//			if (st != null)
+//				st.close();
+//			if (con != null)
+//				con.close();
+
+		}
 	}
 }

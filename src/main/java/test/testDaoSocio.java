@@ -35,7 +35,7 @@ public class testDaoSocio {
 //		System.out.println(daoA.getSocio("7"));
 		
 		try {
-			List<Socio> listaSocios = daoA.listadoSocios(12, 2);
+			List<Socio> listaSocios = daoA.listadoSocios(0, 4);
 			
 			for (Socio socio : listaSocios) {
 				System.out.println(socio);
@@ -44,6 +44,8 @@ public class testDaoSocio {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+//		System.out.println(daoA.listadoSocios(0, 5));
 	}
 
 }

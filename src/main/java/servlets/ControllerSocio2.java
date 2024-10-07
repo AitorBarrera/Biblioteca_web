@@ -11,9 +11,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.DaoAutor;
 import entidades.Autor;
+import entidades.Socio;
 
 /**
  * Servlet implementation class ControllerSocio2
@@ -68,6 +70,60 @@ public class ControllerSocio2 extends HttpServlet {
 				
 				try {
 					procesarError(request, response, e, "socios/listadoAutores.jsp");
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+			
+			break;
+		}
+		
+case "listarAutoresPaginado": {
+			
+			try {
+				int totalRegistros = 0;
+				int pagina = 0;
+				int numregpag = 4;
+				int paginamasalta =0;
+				List<Autor> listadoAutores = null;
+				
+				//Preguntar si tengo parametros en la request
+				if (request.getParameter("pag") != null) {
+					pagina = Integer.parseInt(request.getParameter("pag"));
+				}
+
+				if (request.getParameter("nrp") != null) {
+					numregpag = Integer.parseInt(request.getParameter("nrp"));
+				}
+				
+				//Averiguar cuantos registros hay.
+				totalRegistros = daoAutor.listadoAutores().size();
+				
+				//Calcular cual es la ultima pagina
+				paginamasalta = totalRegistros / numregpag;
+				if(totalRegistros % numregpag == 0) paginamasalta--;
+				
+				//Obtener listado de socios.
+				listadoAutores = daoAutor.listadoAutoresPaginado(pagina, numregpag);
+				
+				
+				//Añadir todos los datos a la request para mandarselos a la vista
+				request.setAttribute("totalregistros", totalRegistros);
+				request.setAttribute("pagina", pagina);
+				request.setAttribute("numregpag", numregpag);
+				request.setAttribute("paginamasalta", paginamasalta);
+				request.setAttribute("listadoautores", listadoAutores);
+				
+				request.getRequestDispatcher("socios/listadoAutoresPaginado.jsp").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				try {
+					procesarError(request, response, e, "socios/listadoAutoresPaginado.jsp");
 					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

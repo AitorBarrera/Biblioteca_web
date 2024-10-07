@@ -165,7 +165,7 @@ public class DaoSocio {
 		try {
 			Conexion miconex = new Conexion();
 			con = miconex.getConexion();
-			String ordenSql = "SELECT * FROM Socio";
+			String ordenSql = "SELECT * FROM Socio ORDER BY idSocio ASC";
 			System.out.println("La orden lanzada es: " + ordenSql);
 			st = con.prepareStatement(ordenSql);
 			rs = st.executeQuery();
@@ -191,6 +191,7 @@ public class DaoSocio {
 			}
 			
 			List<Socio> listaSociosRecortada = listasocios.subList(primera, ultima);
+			System.out.println(listaSociosRecortada);
 			
 			return listaSociosRecortada;
 			
@@ -199,12 +200,12 @@ public class DaoSocio {
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			if (rs != null)
-				rs.close();
-			if (st != null)
-				st.close();
-			if (con != null)
-				con.close();
+//			if (rs != null)
+//				rs.close();
+//			if (st != null)
+//				st.close();
+//			if (con != null)
+//				con.close();
 
 		}
 	}

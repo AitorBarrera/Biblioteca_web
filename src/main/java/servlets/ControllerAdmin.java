@@ -145,17 +145,17 @@ public class ControllerAdmin extends HttpServlet {
 		case "listadoSociosPaginado": {
 			
 			try {
-				ArrayList<Socio> listaSocios = daoSocio.getSocio();
-				System.out.println(listaSocios);
-				
-				request.setAttribute("listaSocios", listaSocios);
-				request.getRequestDispatcher("admin/listadoSocios.jsp").forward(request, response); //redireccion
+//				ArrayList<Socio> listaSocios = daoSocio.getSocio();
+//				System.out.println(listaSocios);
+//				
+//				request.setAttribute("listaSocios", listaSocios);
+//				request.getRequestDispatcher("admin/listadoSocios.jsp").forward(request, response); //redireccion
 				
 				//Copiado de Javi
 				int totalRegistros = 0;
 				int pagina = 0;
-				int numregpag = 5;
-				int paginamasalta = 0;
+				int numregpag = 4;
+				int paginamasalta =0;
 				List<Socio> listadoSocios = null;
 				
 				//Preguntar si tengo parametros en la request
@@ -172,17 +172,18 @@ public class ControllerAdmin extends HttpServlet {
 				
 				//Calcular cual es la ultima pagina
 				paginamasalta = totalRegistros / numregpag;
+				if(totalRegistros % numregpag == 0) paginamasalta--;
 				
 				//Obtener listado de socios.
 				listadoSocios = daoSocio.listadoSocios(pagina, numregpag);
 				
 				
 				//Añadir todos los datos a la request para mandarselos a la vista
-				request.setAttribute("totalRegistros", totalRegistros);
+				request.setAttribute("totalregistros", totalRegistros);
 				request.setAttribute("pagina", pagina);
 				request.setAttribute("numregpag", numregpag);
 				request.setAttribute("paginamasalta", paginamasalta);
-				request.setAttribute("listadoSocios", listadoSocios);
+				request.setAttribute("listadosocios", listadoSocios);
 				
 				request.getRequestDispatcher("admin/listadoSocios.jsp").forward(request, response);
 			} catch (Exception e) {

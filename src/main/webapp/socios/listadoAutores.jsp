@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <title>Lista Autores</title>
 <jsp:directive.include file="../includes/includefile.jspf" />
-    <link rel="stylesheet" href="Resources/css/estiloPropio.css">
-    <link rel="stylesheet" href="./resources/css/estiloPropio.css">
 </head>
 <body>
 	<div class="container">
@@ -17,7 +15,7 @@
 		</div>
 		<h1>Lista Autores</h1>
 		<div style="align-items: center;">
-		<table id="listadoAutores">
+		<table id="listadoAutores" class=" table tablacebra tablaconbordes">
 			<thead>
 				<th>Id</th>
 				<th>Nombre</th>

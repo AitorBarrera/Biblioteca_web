@@ -33,7 +33,10 @@
                Autor</a></li>
                          
          <li><a href="${pageContext.request.contextPath}/controllersocio2?operacion=listarAutores">Listado de Autores</a></li>
-      </ul></li>
+         
+         <li><a href="${pageContext.request.contextPath}/controllersocio2?operacion=listarAutoresPaginado">Listado de Autores paginado</a></li>
+      </ul>
+      </li>
    <li><a href="#" class="MenuBarItemSubmenu">Ejemplares</a>
       <ul>
       
