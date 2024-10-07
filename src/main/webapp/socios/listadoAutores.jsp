@@ -15,7 +15,8 @@
 		</div>
 		<h1>Lista Autores</h1>
 		<div style="align-items: center;">
-		<table id="listadoAutores" class=" table tablacebra tablaconbordes">
+		<div class="w-75 ma">
+		<table id="listadoAutores" class=" table tablacebra tablaconborde">
 			<thead>
 				<th>Id</th>
 				<th>Nombre</th>
@@ -37,6 +38,7 @@
 				</c:forEach>
 			</tbody>
 			</table>
+			</div>
         </div>
 	</div>
 </body>

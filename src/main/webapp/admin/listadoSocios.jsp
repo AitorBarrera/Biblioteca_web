@@ -15,7 +15,8 @@
 		</div>
 		<h1>Lista Socios</h1>
 		<div style="width:100%">
-		<table id="listadoSocios" class=" table tablacebra tablaconbordes">
+		<div class="w-75 ma">
+		<table id="listadoSocios" class=" table tablacebra tablaconborde">
 			<thead>
 			<tr>
 				<th>Id</th>
@@ -43,6 +44,7 @@
 				</c:forEach>
 			</tbody>
 			</table>
+			</div>
 			<div class="w-75 ma py-2">
 				<c:set var="totalregistros" value="${totalregistros}"></c:set>
 				<c:set var="paginaactual" value="${pagina}"></c:set>
@@ -51,10 +53,10 @@
 				<c:out value="Total Registros: ${totalregistros}"></c:out>
 				<c:out
 					value="Mostrando desde ${(registrosporpagina*paginaactual)+1} a ${(registrosporpagina*paginaactual)+registrosporpagina < totalregistros?(registrosporpagina*paginaactual)+registrosporpagina:totalregistros}"></c:out>
+				<a href="${pageContext.request.contextPath}/controllerAdmin?operacion=listadoSociosPaginado&pag=${paginaactual-1>=0?paginaactual-1:paginamasalta}&nrp=${registrosporpagina} ">Ant</a>
 				<a
 					href="${pageContext.request.contextPath}/controllerAdmin?operacion=listadoSociosPaginado&pag=${paginaactual+1>paginamasalta?0:paginaactual+1}&nrp=${registrosporpagina} ">
-					Sig</a> <a
-					href="${pageContext.request.contextPath}/controllerAdmin?operacion=listadoSociosPaginado&pag=${paginaactual-1>=0?paginaactual-1:paginamasalta}&nrp=${registrosporpagina} ">Ant</a>
+					Sig</a> 
 			</div>
         </div>
 	</div>
