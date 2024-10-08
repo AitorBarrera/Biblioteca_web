@@ -284,9 +284,10 @@ public class DaoSocio {
 	 * Metodo para buscar socios por nombre.
 	 * @return lista de socios con nombre que coincida
 	 */
-	public ArrayList<Socio> getSocio(String nombreBuscado) {
+	public ArrayList<Socio> getSocio(String nombreBuscado) throws SQLException, Exception{
 		Connection con = null;
 		PreparedStatement st = null;
+		ResultSet rs = null;
 		Conexion miconex = new Conexion();
 		
 		ArrayList<Socio> listaSocios = new ArrayList<Socio>();
@@ -294,9 +295,9 @@ public class DaoSocio {
 		try {
 			con = miconex.getConexion();
 			con.setAutoCommit(false);
-			String sql = "SELECT * FROM socio WHERE UPPER(TRIM(nombre)) LIKE UPPER(TRIM('%" + nombreBuscado.toUpperCase() + "%'))";
+			String sql = "SELECT * FROM socio WHERE UPPER(TRIM(nombre)) LIKE UPPER(TRIM('%" + nombreBuscado + "%')) ORDER BY idSocio ASC";
 			st = con.prepareStatement(sql);
-			ResultSet rs = st.executeQuery();
+			rs = st.executeQuery();
 			
 			while (rs.next()) {
 				Socio nuevoSocio = new Socio(rs.getInt("idSocio"),rs.getString("email"),rs.getString("nombre"),rs.getString("direccion"), rs.getInt("version"));
@@ -304,20 +305,24 @@ public class DaoSocio {
 			}
 			
 			return listaSocios;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			
-		} catch (Exception e) {
+		} 
+		
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 		} finally {
-			try {
+			if (rs != null)
+				rs.close();
+			if (st != null)
 				st.close();
+			if (con != null)
 				con.close();
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		
 		return listaSocios;

@@ -34,18 +34,26 @@ public class testDaoSocio {
 		
 //		System.out.println(daoA.getSocio("7"));
 		
+//		try {
+//			List<Socio> listaSocios = daoA.listadoSocios(0, 4);
+//			
+//			for (Socio socio : listaSocios) {
+//				System.out.println(socio);
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		System.out.println(daoA.listadoSocios(0, 5));
+		
 		try {
-			List<Socio> listaSocios = daoA.listadoSocios(0, 4);
+			System.out.println(daoA.getSocio("s"));
 			
-			for (Socio socio : listaSocios) {
-				System.out.println(socio);
-			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		System.out.println(daoA.listadoSocios(0, 5));
 	}
 
 }

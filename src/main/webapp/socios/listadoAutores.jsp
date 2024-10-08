@@ -1,5 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,8 @@
 							<c:out value="${autor.nombre}"></c:out>
 						</td>
 						<td>
-							<c:out value="${autor.fechaNacimiento}"></c:out>
+							<!--<c:out value="${autor.fechaNacimiento}"></c:out>-->
+        					<fmt:formatDate pattern="dd/MM/yyyy" value="${autor.fechaNacimiento}"/>
 						</td>
 					</tr>
 				</c:forEach>

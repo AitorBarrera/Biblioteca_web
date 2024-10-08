@@ -218,7 +218,7 @@ public class ControllerAdmin extends HttpServlet {
 				e.printStackTrace();
 				
 				try {
-					procesarError(request, response, e, "admin/listadoSocios.jsp");
+					procesarError(request, response, e, "admin/getsocio.jsp");
 					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -230,6 +230,69 @@ public class ControllerAdmin extends HttpServlet {
 			break;
 		}
 		
+		case "editarSocio": {
+			
+			try {
+				String idSocioAEditar = request.getParameter("idSocioAEditar");
+				
+				Socio SocioAEditar = daoSocio.getSocio(Integer.parseInt(idSocioAEditar));
+				
+				request.setAttribute("socioAEditar", SocioAEditar);
+				request.getRequestDispatcher("admin/modificarSocio.jsp").forward(request, response); //redireccion
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				try {
+					procesarError(request, response, e, "admin/modificarSocio.jsp");
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+			
+			break;
+		}
+		
+		case "guardarSocio": {
+			
+			try {
+				String idSocioAEditar = request.getParameter("idSocioAEditar");
+				
+				Socio socioAEditar = daoSocio.getSocio(Integer.parseInt(idSocioAEditar));
+				
+				String nombre = request.getParameter("nombre");
+				String direccion = request.getParameter("direccion");
+				
+				socioAEditar.setNombre(nombre);
+				socioAEditar.setDireccion(direccion);
+				
+				daoSocio.updateSocio(socioAEditar);
+				
+				request.setAttribute("confirmaroperacion", "Socio con id: " + socioAEditar.getIdSocio() + " editado satisfactoriamente");
+				request.setAttribute("socioAEditar", socioAEditar);
+				request.getRequestDispatcher("admin/modificarSocio.jsp").forward(request, response); //redireccion
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				try {
+					procesarError(request, response, e, "admin/modificarSocio.jsp");
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+			
+			break;
+		}
+
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + operacion);
 		}

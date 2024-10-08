@@ -32,66 +32,41 @@
 		<div id="formSocio" class="formulariogeneral">
 			<form name="frmSocio" method="post" action="${pageContext.request.contextPath}/controllerAdmin">
 				<fieldset id="datosSocio">
-					<legend><img src="${pageContext.request.contextPath}/resources/img/azarquiel.gif">&nbsp;Modificar Socio</legend>
+					<legend><img src="${pageContext.request.contextPath}/resources/img/azarquiel.gif">&nbsp;Modificar Socio de id: ${socioAEditar.idSocio} y de nombre: ${socioAEditar.nombre}</legend>
 					<div class="etiquetas">
 						<label for="nombre">Nombre:</label>
 					</div>
 					<div class="campos">
 						<input type="text" 
 						       id="nombre" 
-						       name="nombreBuscado"
-						       value="${modificarSocio.nombre}" />
-						       
+						       name="nombre"
+						       value="${socioAEditar.nombre}" />
+					</div>
+					<div class="etiquetas">
+						<label for="direccion">Direccion:</label>
+					</div>
+					<div class="campos">
+						<input type="text" 
+						       id="direccion" 
+						       name="direccion" 
+						       value="${socioAEditar.direccion}"
+						       required/>
 						<input name="operacion" 
 						       type="hidden" 
 						       id="operacion" 
-						       value="modificarSocio">
+						       value="guardarSocio">
+						<input name="idSocioAEditar" 
+						       type="hidden" 
+						       id="idSocioAEditar" 
+						       value="${socioAEditar.idSocio}">
 					</div>
 					<div class="cb"></div>
-					<div class="botones mt-3">	
-							<input type="submit" name="Submit" value="Buscar">
+					<div class="botones">	
+							<input type="submit" name="Submit" value="Cambiar">
 					</div>
 				</fieldset>
 			</form>
-        </div>
-	<c:if test="${listaSocios != null}">
-		<h1>Lista Socios</h1>
-		<div class="w-75 ma">
-			<table id="listaSocios" class="table tablacebra tablaconborde tabla-hover">
-				<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nombre</th>
-					<th>Email</th>
-					<th>Direccion</th>
-					<th>EDITAR</th>
-				</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${listaSocios}" var="socio">
-						<tr>
-							<td>
-								<c:out value="${socio.idSocio}"></c:out>
-							</td>
-							<td>
-								<c:out value="${socio.nombre}"></c:out>
-							</td>
-							<td>
-								<c:out value="${socio.email}"></c:out>
-							</td>
-							<td>
-								<c:out value="${socio.direccion}"></c:out>
-							</td>
-							<td>
-								<a 
-								href="${pageContext.request.contextPath}/controllerAdmin?operacion=editarSocio&idSocioAEditar=${socio.idSocio}">EDITAR</a>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
 		</div>
-	</c:if>
 	</div>
 </body>
 </html>

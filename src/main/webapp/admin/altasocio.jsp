@@ -75,6 +75,7 @@
 						       id="operacion" 
 						       value="insertaSocio">
 					</div>
+					<div class="cb"></div>
 					<div class="botones">	
 							<input type="submit" name="Submit" value="Alta">
 					</div>
